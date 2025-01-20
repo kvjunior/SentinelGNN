@@ -2,61 +2,62 @@
 
 This repository contains the code and data for the paper "SentinelGNN: A Neural Network Architecture for Detecting Anomalies in Attributed Multi-graphs". SentinelGNN is a novel graph neural network designed to detect various types of anomalies in complex blockchain transaction networks.
 
-## Paper Abstract
-
-The rapid growth of blockchain networks has introduced unprecedented challenges in detecting anomalous activities within complex transaction graphs. While existing approaches struggle with multi-edge scenarios and temporal dependencies, we present SentinelGNN, a novel graph neural network architecture that achieves state-of-the-art performance in detecting five types of blockchain anomalies: point, contextual, collective, temporal, and structural. 
-
-Through extensive experimentation on a large-scale Ethereum dataset containing 6.08M nodes and 38.90M edges, SentinelGNN achieves ROC-AUC scores of 0.980 ± 0.01 and PR-AUC scores of 0.975 ± 0.01, outperforming traditional graph neural networks by significant margins.
-
 ## Repository Structure
 
-- `data/`: Contains the Ethereum transaction dataset and preprocessing scripts
-- `models/`: Implements the SentinelGNN architecture and baseline models 
-- `utils/`: Utility functions for data loading, evaluation metrics, etc.
-- `experiments/`: Scripts to reproduce the experiments from the paper
-- `docs/`: Additional documentation and tutorials
+- `figures/`: Contains visualizations and plots from the experiments
+- `README.md`: This file, providing an overview of the project
+- `data_processing.py`: Functions for processing and transforming the input graph data
+- `datainfos.txt`: Statistics and insights about the dataset  
+- `main.py`: Main script for training and evaluating the SentinelGNN model
+- `model.py`: Implements the core SentinelGNN model architecture
+- `pyg_gnn_wrapper.py`: Wrapper functions for key PyTorch Geometric operations used in the model
+- `utils.py`: Utility functions for data loading, metrics, etc.
 
 ## Installation
 
-1. Clone the repo: `git clone https://github.com/SentinelGNN/implementation.git`
+1. Clone the repo: `git clone https://github.com/yourusername/SentinelGNN.git`
 2. Install dependencies: `pip install -r requirements.txt`
-3. Download the dataset: `python data/download_data.py`
-4. Preprocess the data: `python data/preprocess.py`
+3. Download the dataset and place it in the appropriate directory (see `datainfos.txt` for details)
 
 ## Usage
 
-To train SentinelGNN on the Ethereum dataset:
+To preprocess the data:
 ```
-python train.py --data_dir data/ethereum/ --model SentinelGNN --epochs 50
+python data_processing.py --data_dir /path/to/data 
+```
+
+To train SentinelGNN:
+```
+python main.py --data_dir /path/to/data --model SentinelGNN --epochs 50
 ```
 
 To evaluate a trained model:
 ```
-python evaluate.py --data_dir data/ethereum/ --model_path checkpoints/sentinelgnn.pt
+python main.py --data_dir /path/to/data --model_path /path/to/model --evaluate
 ```
 
-Refer to the `experiments/` directory for scripts to reproduce specific results from the paper.
+Refer to the code in each script for additional command-line arguments and options.
 
 ## Dataset
 
-The primary dataset is a large-scale Ethereum transaction graph from Oct 2018 to May 2020:
+See `datainfos.txt` for a detailed description of the dataset, including statistics on the graph size, node/edge features, and anomaly labels.
 
-- 6,083,422 nodes (unique addresses) 
-- 38,901,039 edges (transactions)
-- Node features: Account properties, balance history, contract flags
-- Edge features: Transaction amount, gas price, timestamp
-- Temporal resolution: Block-level timestamps
+## Model Architecture
 
-Ground truth anomaly labels are provided by Etherscan for 296 addresses corresponding to illicit activities. 
+The SentinelGNN architecture is implemented across several files:
 
-## Extending SentinelGNN
+- `model.py` contains the core GNN layers, attention mechanisms, and anomaly detection head
+- `pyg_gnn_wrapper.py` provides wrapper functions for key PyTorch Geometric operations
+- `utils.py` includes utility layers like a multi-layer perceptron 
 
-To apply SentinelGNN to a new dataset or blockchain system:
+Refer to the code comments and docstrings for details on each component.
 
-1. Format your data into a suitable graph representation with node/edge features
-2. Modify the data loading and preprocessing scripts in `data/` 
-3. Adjust model hyperparameters like feature dimensions in `models/sentinelgnn.py`
-4. Define new anomaly types or labels in `utils/anomalies.py`
-5. Train, evaluate, and analyse the model performance
+## Results
 
-For more advanced modifications to the GNN architecture itself, refer to the documentation in `models/` and `docs/architecture.md`.
+Key results and visualizations are provided in the `figures/` directory. This includes:
+
+- ROC and Precision-Recall curves for anomaly detection performance
+- t-SNE plots of learned embeddings showing separation of anomalous nodes
+- Attention weight visualizations that highlight important graph structures
+
+The `README.md` in `figures/` provides additional context for each result.
