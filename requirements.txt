@@ -1,0 +1,48 @@
+# Core dependencies
+torch>=2.1.0
+torch_geometric>=2.4.0
+torch_scatter>=2.1.0
+torch-cluster
+torch-spline-conv
+
+# Additional PyTorch modules
+torch-sparse
+torchvision
+
+# Graph learning libraries  
+pytorch_lightning>=2.0.0
+
+# Data loading and processing
+numpy
+pandas
+scipy
+scikit-learn
+matplotlib
+seaborn
+
+# Deep graph library for utilities
+dgl
+
+# Jupyter Notebook support 
+ipykernel
+jupyter
+
+# CUDA support
+cuda116
+Cython
+
+# Model evaluation and statistics  
+tensorboard
+scikit-surprise
+xarray
+networkx
+plotly
+
+# Documentation
+sphinx
+sphinx_rtd_theme
+
+# Code formatting and linting
+black
+flake8
+isort
