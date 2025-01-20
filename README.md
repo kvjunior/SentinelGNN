@@ -6,6 +6,7 @@ This repository contains the code and data for the paper "SentinelGNN: A Neural 
 
 - `figures/`: Contains visualizations and plots from the experiments
 - `README.md`: This file, providing an overview of the project
+- `requirements.txt`: Contains external packages and libraries that this project depends on
 - `data_processing.py`: Functions for processing and transforming the input graph data
 - `datainfos.txt`: Statistics and insights about the dataset  
 - `main.py`: Main script for training and evaluating the SentinelGNN model
